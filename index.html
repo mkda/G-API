@@ -38,6 +38,7 @@
             request.then(function(response) {
                 // TODO: Change code below to process the `response` object:
                 console.log(response.result);
+                populateSheet(response.result);
             }, function(reason) {
                 console.error('error: ' + reason.result.error.message);
             });
@@ -84,11 +85,34 @@
         function handleSignOutClick(event) {
             gapi.auth2.getAuthInstance().signOut();
         }
+
+        function populateSheet(result) {
+            for (var row = 0; row < 8 row++) {
+                for (var col = 0; col < 8; col++) {
+                    document.getElementById(row + ":" + col).value = result.values[row][col];
+                }
+            }
+        }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
     <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
     <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+    <h1>Sheet contents</h1>
+    <div id="contents">
+
+    </div>
+    <script>
+        var text = "";
+
+        for (row = 0; row < row.length; row++) {
+            text += row[i] + "<div style='clear:both'>";
+            for (col = 0; col < col.length; col++) {
+                text += col[i] + "<div style='clear:both'>";
+            }
+        }
+        document.getElementById("contents").innerHTML = text;
+    </script>
 </body>
 
 </html>
